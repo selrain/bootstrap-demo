@@ -6,12 +6,14 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
+import com.fasterxml.jackson.core.json.PackageVersion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class JsonUtils {
 
-	private static String writeObject(Object object, OutputStream os, Writer writer, boolean excludeNull) {
+	public static String writeObject(Object object, OutputStream os, Writer writer, boolean excludeNull) {
 		if (object == null)	return null;
 		if(object instanceof Map){
 			try{((Map) object).remove(null);}catch(Exception e){}
@@ -25,7 +27,8 @@ public class JsonUtils {
 		}
 
 		try {
-			//mapper.registerModule(GewaJsonModule.GEWA_MODULE);
+			SimpleModule newModule = new SimpleModule("UTCDateDeserializer", PackageVersion.VERSION);
+			mapper.registerModule(newModule);
 			if(os!=null){
 				mapper.writeValue(os, object);
 			}else if(writer!=null){

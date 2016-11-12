@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+   <link href="/boot/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/boot/css/bootstrap-table.css" rel="stylesheet"> 
+  </head>
+<body>
+<div class="container">
+    <div class="row">
+        <h2>BootStrap Table插件</h2>
+    </div>
+    <div class="row">
+        <div id="toolbar">
+            <button id="load" class="btn btn-default">异步加载数据</button>
+        </div>
+        <table id="table" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-pagination="true" data-page-list="[10,30, 80, 120, 200, ALL]">
+            <thead>
+				 <tr>             
+                    <th data-field="partnerId" data-sortable="true">系统ID</th>
+                    <th data-field="partnerName" data-sortable="true">名称</th>
+                    <th data-field="balance" data-sortable="true">金额</th>
+                </tr>
+            </thead>
+        </table>
+    </div>   
+</div>
+</body>
+<script src="/boot/script/jquery-3.1.0.min.js"></script>
+<script src="/boot/script/bootstrap.min.js"></script>
+<script src="/boot/script/bootstrap-table.js"></script>
+<script src="/boot/script/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript">
+$('#load').click(function(){
+    $.post('/boot/bootstrap/table.xhtml',null,function(result){
+        $('#table').bootstrapTable('load',result);
+    },'json');
+});
+</script>
+</html>
