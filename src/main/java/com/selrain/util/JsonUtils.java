@@ -20,7 +20,6 @@ public class JsonUtils {
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_NULL_MAP_VALUES);
-		//不自动关闭流
 		mapper.getFactory().disable(Feature.AUTO_CLOSE_TARGET);
 		if(excludeNull) {
 			mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

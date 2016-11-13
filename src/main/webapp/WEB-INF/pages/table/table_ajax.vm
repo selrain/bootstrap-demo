@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
    <link href="/boot/css/bootstrap.min.css" rel="stylesheet">
    <link href="/boot/css/bootstrap-table.css" rel="stylesheet"> 
   </head>
@@ -14,7 +14,7 @@
         <div id="toolbar">
             <button id="load" class="btn btn-default">异步加载数据</button>
         </div>
-        <table id="table" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-pagination="true" data-page-list="[10,30, 80, 120, 200, ALL]">
+        <table id="table" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-pagination="true" data-page-list="[10,30, 80, 120, 200, ALL]">
             <thead>
 				 <tr>             
                     <th data-field="partnerId" data-sortable="true">系统ID</th>
@@ -32,8 +32,13 @@
 <script src="/boot/script/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript">
 $('#load').click(function(){
-    $.post('/boot/bootstrap/table.xhtml',null,function(result){
+    $.post('/boot/bootstrap/table_ajax.xhtml',null,function(result){
         $('#table').bootstrapTable('load',result);
+		//添加行click事件
+        $('#table').on('click-row.bs.table',function(row,ele,field){
+            alert(ele.partnerName)
+        })
+        
     },'json');
 });
 </script>
